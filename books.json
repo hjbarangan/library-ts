@@ -1,0 +1,10 @@
+{
+    "isbn": "test-isbn-1",
+    "publication_year": "2006",
+    "publisher_id": "1",
+    "title": "The 5th Wave",
+    "author": "Herzlia Jane Barangan",
+    "category_id": "2",
+    "pages": "233",
+    "status": "active"
+}
