@@ -1,4 +1,5 @@
 import { pool } from "../database";
+import { Book } from "../interfaces/interface";
 
 const getAllBooks = async () => {
   try {
@@ -22,7 +23,7 @@ const getBookById = async (bookId: number) => {
   }
 };
 
-const createBook = async (book: any) => {
+const createBook = async (book: Book) => {
   try {
     const client = await pool.connect();
     const {
@@ -54,7 +55,7 @@ const createBook = async (book: any) => {
   }
 };
 
-const updateBook = async (book: any, bookId: any) => {
+const updateBook = async (book: Book, bookId: number) => {
   try {
     const client = await pool.connect();
     const {

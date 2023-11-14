@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Book } from "../interfaces/interface";
 import * as BookService from "../data-access/book.query";
 
 const getAllBooks = async (req: Request, res: Response) => {
@@ -13,8 +14,8 @@ const getAllBooks = async (req: Request, res: Response) => {
 
 const getBookById = async (req: Request, res: Response) => {
   try {
-    const book_id: number = parseInt(req.params.id);
-    const books = await BookService.getBookById(book_id);
+    const bookId: number = parseInt(req.params.id);
+    const books = await BookService.getBookById(bookId);
     res.status(200).json(books);
   } catch (error) {
     console.error("Error:", error);
@@ -24,7 +25,7 @@ const getBookById = async (req: Request, res: Response) => {
 
 const createBook = async (req: Request, res: Response) => {
   try {
-    const book: any = req.body;
+    const book: Book = req.body;
     const books = await BookService.createBook(book);
     res.status(200).json(books);
   } catch (error) {
@@ -35,8 +36,8 @@ const createBook = async (req: Request, res: Response) => {
 
 const updateBook = async (req: Request, res: Response) => {
   try {
-    const updatedBook: any = req.body;
-    const bookId: any = req.params.id;
+    const updatedBook: Book = req.body;
+    const bookId: number = parseInt(req.params.id);
     const books = await BookService.updateBook(updatedBook, bookId);
     res.status(200).json(books);
   } catch (error) {
@@ -47,8 +48,8 @@ const updateBook = async (req: Request, res: Response) => {
 
 const deleteBook = async (req: Request, res: Response) => {
   try {
-    const book_id: number = parseInt(req.params.id);
-    const books = await BookService.deleteBook(book_id);
+    const bookId: number = parseInt(req.params.id);
+    const books = await BookService.deleteBook(bookId);
     res.status(200).json(books);
   } catch (error) {
     console.error("Error:", error);
@@ -58,8 +59,8 @@ const deleteBook = async (req: Request, res: Response) => {
 
 const getBooksByCategory = async (req: Request, res: Response) => {
   try {
-    const book_id: number = parseInt(req.params.id);
-    const books = await BookService.getBooksByCategory(book_id);
+    const bookId: number = parseInt(req.params.id);
+    const books = await BookService.getBooksByCategory(bookId);
     res.status(200).json(books);
   } catch (error) {
     console.error("Error:", error);
@@ -69,8 +70,8 @@ const getBooksByCategory = async (req: Request, res: Response) => {
 
 const getBooksByPublisher = async (req: Request, res: Response) => {
   try {
-    const book_id: number = parseInt(req.params.id);
-    const books = await BookService.getBooksByPublisher(book_id);
+    const bookId: number = parseInt(req.params.id);
+    const books = await BookService.getBooksByPublisher(bookId);
     res.status(200).json(books);
   } catch (error) {
     console.error("Error:", error);
