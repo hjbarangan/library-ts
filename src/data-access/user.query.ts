@@ -63,4 +63,15 @@ const deleteUser = async (userId: number) => {
   }
 };
 
-export { getAllUsers, getUserById, createUser, updateUser, deleteUser };
+const findUserByUsername = async (username: string) => {
+  try {
+    const client = await pool.connect();
+    const sql = "SELECT * FROM user WHERE username = $1";
+    const result = await client.query(sql, [username]);
+    return result.rows;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getAllUsers, getUserById, createUser, updateUser, deleteUser, findUserByUsername };
