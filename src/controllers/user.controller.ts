@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { User } from "../interfaces/interface";
+import { User } from "../interfaces";
 import * as UserService from "../services/user.service";
 
 const login = async (req: Request, res: Response) => {
   try {
-    const username: string = req.params.username;
-    const user = await UserService.loginService(username);
-    res.status(200).json(user);
+    const user: User = req.body;
+    const users = await UserService.loginService(user);
+    res.status(200).json(users);
   } catch (error) {
     console.error("Error:", error);
     res.status(400).json({ error: `Error: ${error}` });
@@ -15,10 +15,10 @@ const login = async (req: Request, res: Response) => {
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const books = await UserService.getAllUsersService();
-    res.status(200).json(books);
+    const users = await UserService.getAllUsersService();
+    res.status(200).json(users);
   } catch (error) {
-    console.error("Error getting books:", error);
+    console.error("Error getting users:", error);
     res.status(400).json({ error: `Error: ${error}` });
   }
 };
@@ -26,8 +26,8 @@ const getAllUsers = async (req: Request, res: Response) => {
 const getUserById = async (req: Request, res: Response) => {
   try {
     const book_id: number = parseInt(req.params.id);
-    const books = await UserService.getUserByIdService(book_id);
-    res.status(200).json(books);
+    const users = await UserService.getUserByIdService(book_id);
+    res.status(200).json(users);
   } catch (error) {
     console.error("Error:", error);
     res.status(400).json({ error: `Error: ${error}` });
@@ -37,8 +37,8 @@ const getUserById = async (req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   try {
     const user: User = req.body;
-    const books = await UserService.createUserService(user);
-    res.status(200).json(books);
+    const users = await UserService.createUserService(user);
+    res.status(200).json(users);
   } catch (error) {
     console.error("Error:", error);
     res.status(400).json({ error: `Error: ${error}` });
@@ -49,8 +49,8 @@ const updateUser = async (req: Request, res: Response) => {
   try {
     const updatedUser: User = req.body;
     const bookId: any = req.params.id;
-    const books = await UserService.updateUserService(updatedUser, bookId);
-    res.status(200).json(books);
+    const users = await UserService.updateUserService(updatedUser, bookId);
+    res.status(200).json(users);
   } catch (error) {
     console.error("Error:", error);
     res.status(400).json({ error: `Error: ${error}` });
@@ -60,8 +60,8 @@ const updateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const book_id: number = parseInt(req.params.id);
-    const books = await UserService.deleteUserService(book_id);
-    res.status(200).json(books);
+    const users = await UserService.deleteUserService(book_id);
+    res.status(200).json(users);
   } catch (error) {
     console.error("Error:", error);
     res.status(400).json({ error: `Error: ${error}` });

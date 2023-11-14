@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Book } from "../interfaces/interface";
+import { Book } from "../interfaces";
 import * as BookService from "../data-access/book.query";
 
 const getAllBooks = async (req: Request, res: Response) => {

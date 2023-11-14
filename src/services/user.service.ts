@@ -6,7 +6,7 @@ import {
   findUserByUsername,
   deleteUser,
 } from "../data-access/user.query";
-import { User } from "../interfaces/interface";
+import { User } from "../interfaces";
 import { comparePassword, generateJwt } from "../utils";
 
 const getAllUsersService = async () => {

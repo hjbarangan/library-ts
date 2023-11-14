@@ -1,10 +1,10 @@
 import { pool } from "../database";
-import { User } from "../interfaces/interface";
+import { User } from "../interfaces";
 
 const getAllUsers = async () => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM user";
+    const sql = "SELECT * FROM user_account";
     const result = await client.query(sql);
     return result.rows;
   } catch (error) {
@@ -15,7 +15,7 @@ const getAllUsers = async () => {
 const getUserById = async (userId: number) => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM user where user_id = $1";
+    const sql = "SELECT * FROM user_account where user_id = $1";
     const result = await client.query(sql, [userId]);
     return result.rows;
   } catch (error) {
@@ -29,7 +29,7 @@ const createUser = async (user: User) => {
     const { reader_id, admin_id, username, password, status } = user;
     const params = [reader_id, admin_id, username, password, status];
     const sql =
-      "INSERT INTO user (reader_id, admin_id, username, password, status ) VALUES ( $1, $2, $3, $4, $5) RETURNING *;";
+      "INSERT INTO user_account (reader_id, admin_id, username, password, status ) VALUES ( $1, $2, $3, $4, $5) RETURNING *;";
     const result = await client.query(sql, params);
     return result.rows;
   } catch (error) {
@@ -43,7 +43,7 @@ const updateUser = async (user: User, userId: number) => {
     const { reader_id, admin_id, username, password, status } = user;
     const params = [reader_id, admin_id, username, password, status, userId];
     const sql =
-      "UPDATE user SET reader_id = $1, admin_id = $2, username = $3, password = $4, status = $5 WHERE user_id = $6 RETURNING *";
+      "UPDATE user_account SET reader_id = $1, admin_id = $2, username = $3, password = $4, status = $5 WHERE user_id = $6 RETURNING *";
     const result = await client.query(sql, params);
     return result.rows;
   } catch (error) {
@@ -55,7 +55,7 @@ const deleteUser = async (userId: number) => {
   try {
     const client = await pool.connect();
     const sql =
-      "UPDATE user SET status = 'inactive' WHERE user_id = $1 RETURNING *";
+      "UPDATE user_account SET status = 'inactive' WHERE user_id = $1 RETURNING *";
     const result = await client.query(sql, [userId]);
     return result.rows;
   } catch (error) {
@@ -66,7 +66,7 @@ const deleteUser = async (userId: number) => {
 const findUserByUsername = async (username: string) => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM user WHERE username = $1";
+    const sql = "SELECT * FROM user_account WHERE username = $1";
     const result = await client.query(sql, [username]);
     return result.rows;
   } catch (error) {

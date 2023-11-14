@@ -1,5 +1,5 @@
 import { pool } from "../database";
-import { Book } from "../interfaces/interface";
+import { Book } from "../interfaces";
 
 const getAllBooks = async () => {
   try {

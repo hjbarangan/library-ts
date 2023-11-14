@@ -17,4 +17,9 @@ interface User {
   status: string;
 }
 
-export { Book, User };
+interface Categories {
+  category_id: number;
+  category_name: string;
+}
+
+export { Book, User, Categories };
