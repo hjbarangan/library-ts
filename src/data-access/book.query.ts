@@ -11,11 +11,11 @@ const getAllBooks = async () => {
   }
 };
 
-const getBookById = async (book_id: number) => {
+const getBookById = async (bookId: number) => {
   try {
     const client = await pool.connect();
     const sql = "SELECT * FROM book where book_id = $1";
-    const result = await client.query(sql, [book_id]);
+    const result = await client.query(sql, [bookId]);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -54,7 +54,7 @@ const createBook = async (book: any) => {
   }
 };
 
-const updateBook = async (book_id: number, book: any) => {
+const updateBook = async (book: any, bookId: any) => {
   try {
     const client = await pool.connect();
     const {
@@ -76,7 +76,7 @@ const updateBook = async (book_id: number, book: any) => {
       category_id,
       pages,
       status,
-      book_id,
+      bookId,
     ];
     const sql =
       "UPDATE book SET isbn = $1, publication_year = $2, publisher_id = $3, title = $4, author = $5, category_id = $6, pages = $7, status = $8 WHERE book_id = $9 RETURNING *";
@@ -87,12 +87,12 @@ const updateBook = async (book_id: number, book: any) => {
   }
 };
 
-const deleteBook = async (book_id: number) => {
+const deleteBook = async (bookId: number) => {
   try {
     const client = await pool.connect();
     const sql =
       "UPDATE book SET status = 'inactive' WHERE book_id = $1 RETURNING *";
-    const result = await client.query(sql, [book_id]);
+    const result = await client.query(sql, [bookId]);
     return result.rows;
   } catch (error) {
     console.log(error);
