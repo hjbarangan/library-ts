@@ -86,5 +86,5 @@ export {
   updateBook,
   deleteBook,
   getBooksByCategory,
-  getBooksByPublisher,
+  getBooksByPublisher
 };

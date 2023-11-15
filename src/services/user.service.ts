@@ -4,7 +4,7 @@ import {
   createUser,
   updateUser,
   findUserByUsername,
-  deleteUser,
+  deleteUser
 } from "../data-access/user.query";
 import { User } from "../interfaces";
 import { comparePassword, generateJwt } from "../utils";
@@ -84,5 +84,5 @@ export {
   createUserService,
   updateUserService,
   deleteUserService,
-  loginService,
+  loginService
 };

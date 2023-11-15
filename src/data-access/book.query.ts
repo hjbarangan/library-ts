@@ -34,7 +34,7 @@ const createBook = async (book: Book) => {
       author,
       category_id,
       pages,
-      status,
+      status
     } = book;
     const params = [
       isbn,
@@ -44,7 +44,7 @@ const createBook = async (book: Book) => {
       author,
       category_id,
       pages,
-      status,
+      status
     ];
     const sql =
       "INSERT INTO book (isbn , publication_year , publisher_id , title , author , category_id , pages, status  ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;";
@@ -66,7 +66,7 @@ const updateBook = async (book: Book, bookId: number) => {
       author,
       category_id,
       pages,
-      status,
+      status
     } = book;
     const params = [
       isbn,
@@ -77,7 +77,7 @@ const updateBook = async (book: Book, bookId: number) => {
       category_id,
       pages,
       status,
-      bookId,
+      bookId
     ];
     const sql =
       "UPDATE book SET isbn = $1, publication_year = $2, publisher_id = $3, title = $4, author = $5, category_id = $6, pages = $7, status = $8 WHERE book_id = $9 RETURNING *";
@@ -129,5 +129,5 @@ export {
   updateBook,
   deleteBook,
   getBooksByCategory,
-  getBooksByPublisher,
+  getBooksByPublisher
 };

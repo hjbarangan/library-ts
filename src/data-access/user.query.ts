@@ -72,6 +72,13 @@ const findUserByUsername = async (username: string) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export { getAllUsers, getUserById, createUser, updateUser, deleteUser, findUserByUsername };
+export {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  findUserByUsername
+};
