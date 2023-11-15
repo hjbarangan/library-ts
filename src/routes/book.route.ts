@@ -1,5 +1,13 @@
 import { Router } from "express";
-import { getAllBooks, getBookById, createBook, updateBook, deleteBook, getBooksByCategory, getBooksByPublisher } from "../controllers/book.controller";
+import {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook,
+  getBooksByCategory,
+  getBooksByPublisher
+} from "../controllers/book.controller";
 
 const router = Router();
 router.get("/books", getAllBooks);
