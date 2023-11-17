@@ -15,8 +15,8 @@ const getAllCategories = async (req: Request, res: Response) => {
 
 const getCategoryById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const category = await CategoryService.getCategoryByIdService(parseInt(id));
+    const categoryId: number = parseInt(req.params.id);
+    const category = await CategoryService.getCategoryByIdService(categoryId);
     res.status(200).json(category);
   } catch (error) {
     console.error("Error getting category:", error);
@@ -26,8 +26,9 @@ const getCategoryById = async (req: Request, res: Response) => {
 
 const createCategory = async (req: Request, res: Response) => {
   try {
-    const { name } = req.body;
-    await CategoryService.createCategoryService(name);
+    const { category_name } = req.body;
+
+    await CategoryService.createCategoryService(category_name);
     res.status(201).json({ message: "Category created" });
   } catch (error) {
     console.error("Error creating category:", error);
@@ -37,13 +38,11 @@ const createCategory = async (req: Request, res: Response) => {
 
 const updateCategory = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { name } = req.body;
-    const category: Category = { id: parseInt(id), name };
-    await CategoryService.updateCategoryService(category);
-    // const updatedCategory: Category = { id: parseInt(id), name }; // create new Category object with updated name
-    // await CategoryService.updateCategoryService(updatedCategory);
-    // await CategoryService.updateCategoryService(parseInt(id), name);
+
+    const updatedCategory: Category = req.body;
+    const categoryId: number = parseInt(req.params.id);
+    await CategoryService.updateCategoryService(updatedCategory, categoryId);
+
     res.status(200).json({ message: "Category updated" });
   } catch (error) {
     console.error("Error updating category:", error);
@@ -53,8 +52,8 @@ const updateCategory = async (req: Request, res: Response) => {
 
 const deleteCategory = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    await CategoryService.deleteCategoryService(parseInt(id));
+    const categoryId: number = parseInt(req.params.id);
+    await CategoryService.deleteCategoryService(categoryId);
     res.status(200).json({ message: "Category deleted" });
   } catch (error) {
     console.error("Error deleting category:", error);

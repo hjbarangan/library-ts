@@ -8,8 +8,7 @@ const login = async (req: Request, res: Response) => {
     const users = await UserService.loginService(user);
     res.status(200).json(users);
   } catch (error) {
-    console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ error: `${error}` });
   }
 };
 
@@ -19,7 +18,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     res.status(200).json(users);
   } catch (error) {
     console.error("Error getting users:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json(error);
   }
 };
 

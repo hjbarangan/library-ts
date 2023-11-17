@@ -73,8 +73,8 @@ const loginService = async (user: any) => {
     }
 
     return token;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 
