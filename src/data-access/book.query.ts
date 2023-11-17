@@ -4,7 +4,7 @@ import { Book } from "../interfaces";
 const getAllBooks = async () => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM book";
+    const sql = "SELECT * FROM v_books";
     const result = await client.query(sql);
     return result.rows;
   } catch (error) {
@@ -46,9 +46,9 @@ const createBook = async (book: Book) => {
       pages,
       status
     ];
-    const sql =
-      "INSERT INTO book (isbn , publication_year , publisher_id , title , author , category_id , pages, status  ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;";
-    const result = await client.query(sql, params);
+
+    const storedProcedure = "CALL add_book($1, $2, $3, $4, $5, $6, $7, $8)";
+    const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -79,9 +79,8 @@ const updateBook = async (book: Book, bookId: number) => {
       status,
       bookId
     ];
-    const sql =
-      "UPDATE book SET isbn = $1, publication_year = $2, publisher_id = $3, title = $4, author = $5, category_id = $6, pages = $7, status = $8 WHERE book_id = $9 RETURNING *";
-    const result = await client.query(sql, params);
+    const storedProcedure = "CALL update_book($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+    const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -91,9 +90,8 @@ const updateBook = async (book: Book, bookId: number) => {
 const deleteBook = async (bookId: number) => {
   try {
     const client = await pool.connect();
-    const sql =
-      "UPDATE book SET status = 'inactive' WHERE book_id = $1 RETURNING *";
-    const result = await client.query(sql, [bookId]);
+    const storedProcedure = "CALL delete_book($1)";
+    const result = await client.query(storedProcedure, [bookId]);
     return result.rows;
   } catch (error) {
     console.log(error);

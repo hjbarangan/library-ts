@@ -36,8 +36,8 @@ const createCategory = async (category: Category) => {
 const updateCategory = async (category: Category, categoryId: number, ) => {
   try {
     const client = await pool.connect();
-    const sql = "UPDATE category SET category_name = $1 WHERE category_id = $2";
-    await client.query(sql, [category, categoryId]);
+    const storedProcedure = "CALL update_category($1, $2)";
+    await client.query(storedProcedure, [category, categoryId]);
   } catch (error) {
     console.log(error);
   }

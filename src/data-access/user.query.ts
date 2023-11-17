@@ -4,7 +4,7 @@ import { User } from "../interfaces";
 const getAllUsers = async () => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM user_account";
+    const sql = "SELECT * FROM v_user";
     const result = await client.query(sql);
     return result.rows;
   } catch (error) {
@@ -28,9 +28,8 @@ const createUser = async (user: User) => {
     const client = await pool.connect();
     const { reader_id, admin_id, username, password, status } = user;
     const params = [reader_id, admin_id, username, password, status];
-    const sql =
-      "INSERT INTO user_account (reader_id, admin_id, username, password, status ) VALUES ( $1, $2, $3, $4, $5) RETURNING *;";
-    const result = await client.query(sql, params);
+    const storedProcedure = "CALL add_useraccount($1, $2, $3, $4, $5)";
+    const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -42,9 +41,8 @@ const updateUser = async (user: User, userId: number) => {
     const client = await pool.connect();
     const { reader_id, admin_id, username, password, status } = user;
     const params = [reader_id, admin_id, username, password, status, userId];
-    const sql =
-      "UPDATE user_account SET reader_id = $1, admin_id = $2, username = $3, password = $4, status = $5 WHERE user_id = $6 RETURNING *";
-    const result = await client.query(sql, params);
+    const storedProcedure = "CALL update_useraccount($1, $2, $3, $4, $5, $6)";
+    const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
@@ -54,9 +52,8 @@ const updateUser = async (user: User, userId: number) => {
 const deleteUser = async (userId: number) => {
   try {
     const client = await pool.connect();
-    const sql =
-      "UPDATE user_account SET status = 'inactive' WHERE user_id = $1 RETURNING *";
-    const result = await client.query(sql, [userId]);
+    const storedProcedure = "CALL delete_useraccount($1)";
+    const result = await client.query(storedProcedure, [userId]);
     return result.rows;
   } catch (error) {
     console.log(error);
