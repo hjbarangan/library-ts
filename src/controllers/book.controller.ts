@@ -2,31 +2,6 @@ import { Request, Response } from "express";
 import { Book } from "../interfaces";
 import * as BookService from "../services/book.service";
 
-/**
- * @swagger
- * /createBook:
- *   post:
- *     summary: Create a new book
- *     description: Endpoint to create a new book
- *     consumes:
- *       - application/json
- *     parameters:
- *       - in: body
- *         name: book
- *         description: The book to be created
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Book'
- *     responses:
- *       200:
- *         description: Book created successfully
- *         schema:
- *           $ref: '#/definitions/Book'
- *       400:
- *         description: Bad request
- *         schema:
- *           $ref: '#/definitions/Error'
- */
 const getAllBooks = async (req: Request, res: Response) => {
   try {
     const books = await BookService.getAllBooksService();

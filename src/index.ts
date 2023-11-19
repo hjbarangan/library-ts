@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import initRouter from "./routes/_index";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { options } from "./swagger.config";
+import swaggerSpec from "./swagger.config"; 
 
 dotenv.config();
 
@@ -16,9 +16,9 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.use(cors());
 app.use(express.json());
-const specs = swaggerJsdoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 initRouter(app);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 
 

@@ -1,21 +1,34 @@
-// swagger.config.js
+import swaggerJsdoc from "swagger-jsdoc";
+
 const options = {
-    definition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'Your API Documentation',
-        version: '1.0.0',
-        description: 'Documentation for your API',
-      },
-      servers: [
-        {
-          url: ['http://localhost:3000'], // Update with your server URL
-          
-        },
-      ],
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "UI/UX UPSKILL: Library API",
+      version: "1.0.0",
+      description: "API documentation for the Library application",
     },
-    apis: ["../src/controllers/book.controller.ts"], // Update with the path to your controller file
-  };
-  
-export {options};
-  
+    components: {
+      schemas: {
+        Book: {
+          type: "object",
+          properties: {
+            isbn: { type: "string" },
+            publication_year: { type: "integer" },
+            publisher_id: { type: "integer" },
+            title: { type: "string" },
+            author: { type: "string" },
+            category_id: { type: "integer" },
+            pages: { type: "integer" },
+            status: { type: "string" },
+          },
+        },
+      },
+    },
+  },
+  apis: ["./src/routes/*.ts"],
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+
+export default swaggerSpec;
