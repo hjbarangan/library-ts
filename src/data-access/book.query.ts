@@ -9,6 +9,7 @@ const getAllBooks = async () => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -20,12 +21,12 @@ const getBookById = async (bookId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
-const createBook = async (book: Book) => {
+const createBookQuery = async (book: Book) => {
   try {
-    const client = await pool.connect();
     const {
       isbn,
       publication_year,
@@ -36,6 +37,7 @@ const createBook = async (book: Book) => {
       pages,
       status
     } = book;
+
     const params = [
       isbn,
       publication_year,
@@ -47,11 +49,15 @@ const createBook = async (book: Book) => {
       status
     ];
 
-    const storedProcedure = "CALL add_book($1, $2, $3, $4, $5, $6, $7, $8)";
-    const result = await client.query(storedProcedure, params);
-    return result.rows;
+    const result = await pool.query(
+      "CALL add_book($1, $2, $3, $4, $5, $6, $7, $8)",
+      params
+    );
+
+    return result.rows[0]; // Assuming your stored procedure returns the inserted row
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -79,11 +85,13 @@ const updateBook = async (book: Book, bookId: number) => {
       status,
       bookId
     ];
-    const storedProcedure = "CALL update_book($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+    const storedProcedure =
+      "CALL update_book($1, $2, $3, $4, $5, $6, $7, $8, $9)";
     const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -95,6 +103,7 @@ const deleteBook = async (bookId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -106,6 +115,7 @@ const getBooksByCategory = async (categoryId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -117,13 +127,14 @@ const getBooksByPublisher = async (publisherId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
 export {
   getAllBooks,
   getBookById,
-  createBook,
+  createBookQuery,
   updateBook,
   deleteBook,
   getBooksByCategory,

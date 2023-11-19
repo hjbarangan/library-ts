@@ -7,8 +7,9 @@ const login = async (req: Request, res: Response) => {
     const user: User = req.body;
     const users = await UserService.loginService(user);
     res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json({ error: `${error}` });
+  } catch (error: any) {
+    console.error("Error:", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -16,9 +17,9 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await UserService.getAllUsersService();
     res.status(200).json(users);
-  } catch (error) {
-    console.error("Error getting users:", error);
-    res.status(400).json(error);
+  } catch (error: any) {
+    console.error("Error:", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -27,9 +28,9 @@ const getUserById = async (req: Request, res: Response) => {
     const book_id: number = parseInt(req.params.id);
     const users = await UserService.getUserByIdService(book_id);
     res.status(200).json(users);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -38,9 +39,9 @@ const createUser = async (req: Request, res: Response) => {
     const user: User = req.body;
     const users = await UserService.createUserService(user);
     res.status(200).json(users);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -50,9 +51,9 @@ const updateUser = async (req: Request, res: Response) => {
     const bookId: any = req.params.id;
     const users = await UserService.updateUserService(updatedUser, bookId);
     res.status(200).json(users);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -61,9 +62,9 @@ const deleteUser = async (req: Request, res: Response) => {
     const book_id: number = parseInt(req.params.id);
     const users = await UserService.deleteUserService(book_id);
     res.status(200).json(users);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 

@@ -15,6 +15,7 @@ const getAllUsersService = async () => {
     return users;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -24,6 +25,7 @@ const getUserByIdService = async (id: number) => {
     return user;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -33,6 +35,7 @@ const createUserService = async (user: User) => {
     return newUser;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 const updateUserService = async (user: User, id: number) => {
@@ -50,6 +53,7 @@ const deleteUserService = async (id: number) => {
     return deletedUser;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -73,8 +77,9 @@ const loginService = async (user: any) => {
     }
 
     return token;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
 

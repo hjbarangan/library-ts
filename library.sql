@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS publisher (
 
 CREATE TABLE IF NOT EXISTS reader (
     reader_id SERIAL PRIMARY KEY,
-    family_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
     birth_date DATE NOT NULL
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS borrow_record (
 
 CREATE TABLE IF NOT EXISTS admin (
     admin_id SERIAL PRIMARY KEY,
-    family_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL
 );
 

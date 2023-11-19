@@ -9,6 +9,7 @@ const getAllCategories = async () => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -20,6 +21,7 @@ const getCategoryById = async (categoryId: number) => {
     return result.rows[0];
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -30,16 +32,18 @@ const createCategory = async (category: Category) => {
     await client.query(storedProcedure, [category]);
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
-const updateCategory = async (category: Category, categoryId: number, ) => {
+const updateCategory = async (category: Category, categoryId: number) => {
   try {
     const client = await pool.connect();
     const storedProcedure = "CALL update_category($1, $2)";
     await client.query(storedProcedure, [category, categoryId]);
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
@@ -50,6 +54,7 @@ const deleteCategory = async (categoryId: number) => {
     await client.query(storedProcedure, [categoryId]);
   } catch (error) {
     console.log(error);
+    throw error; // Rethrow the error to propagate it to the service
   }
 };
 
