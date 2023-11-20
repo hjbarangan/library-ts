@@ -9,6 +9,7 @@ const getAllUsers = async () => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -20,6 +21,7 @@ const getUserById = async (userId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -33,6 +35,7 @@ const createUser = async (user: User) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -46,6 +49,7 @@ const updateUser = async (user: User, userId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; 
   }
 };
 
@@ -57,6 +61,7 @@ const deleteUser = async (userId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error; 
   }
 };
 
@@ -68,6 +73,7 @@ const findUserByUsername = async (username: string) => {
     return result.rows;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 

@@ -6,9 +6,9 @@ const getAllBooks = async (req: Request, res: Response) => {
   try {
     const books = await BookService.getAllBooksService();
     res.status(200).json(books);
-  } catch (error) {
-    console.error("Error getting books:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+  } catch (error: any) {
+    console.error("Error:", error);
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -17,20 +17,20 @@ const getBookById = async (req: Request, res: Response) => {
     const bookId: number = parseInt(req.params.id);
     const books = await BookService.getBookByIdService(bookId);
     res.status(200).json(books);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
 const createBook = async (req: Request, res: Response) => {
   try {
     const book: Book = req.body;
-    const books = await BookService.createBookService(book);
-    res.status(200).json(books);
-  } catch (error) {
+    await BookService.createBookService(book);
+    res.status(200).json({ book, message: "Book created" });
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -40,9 +40,9 @@ const updateBook = async (req: Request, res: Response) => {
     const bookId: number = parseInt(req.params.id);
     const books = await BookService.updateBookService(updatedBook, bookId);
     res.status(200).json(books);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -51,9 +51,9 @@ const deleteBook = async (req: Request, res: Response) => {
     const bookId: number = parseInt(req.params.id);
     const books = await BookService.deleteBookService(bookId);
     res.status(200).json(books);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -62,9 +62,9 @@ const getBooksByCategory = async (req: Request, res: Response) => {
     const bookId: number = parseInt(req.params.id);
     const books = await BookService.getBooksByCategoryService(bookId);
     res.status(200).json(books);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -73,11 +73,12 @@ const getBooksByPublisher = async (req: Request, res: Response) => {
     const bookId: number = parseInt(req.params.id);
     const books = await BookService.getBooksByPublisherService(bookId);
     res.status(200).json(books);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error:", error);
-    res.status(400).json({ error: `Error: ${error}` });
+    res.status(400).json({ message: error.message });
   }
 };
+
 
 export {
   getAllBooks,

@@ -3,9 +3,9 @@ import {
   getBookById,
   getBooksByCategory,
   getBooksByPublisher,
-  createBook,
+  createBookQuery,
   updateBook,
-  deleteBook,
+  deleteBook
 } from "../data-access/book.query";
 import { Book } from "../interfaces";
 
@@ -33,6 +33,7 @@ const getBooksByCategoryService = async (categoryId: number) => {
     return books;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -42,15 +43,17 @@ const getBooksByPublisherService = async (publisherId: number) => {
     return books;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
 const createBookService = async (book: Book) => {
   try {
-    const newBook = await createBook(book);
+    const newBook = await createBookQuery(book);
     return newBook;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 const updateBookService = async (book: Book, bookId: number) => {
@@ -59,6 +62,7 @@ const updateBookService = async (book: Book, bookId: number) => {
     return updatedBook;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 const deleteBookService = async (bookId: number) => {
@@ -67,7 +71,16 @@ const deleteBookService = async (bookId: number) => {
     return deletedBook;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-export {getAllBooksService, getBookByIdService, getBooksByCategoryService, getBooksByPublisherService, createBookService, updateBookService, deleteBookService}
+export {
+  getAllBooksService,
+  getBookByIdService,
+  getBooksByCategoryService,
+  getBooksByPublisherService,
+  createBookService,
+  updateBookService,
+  deleteBookService
+};
