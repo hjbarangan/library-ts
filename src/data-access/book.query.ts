@@ -54,7 +54,7 @@ const createBookQuery = async (book: Book) => {
       params
     );
 
-    return result.rows[0]; // Assuming your stored procedure returns the inserted row
+    return result; // Assuming your stored procedure returns the inserted row
   } catch (error) {
     console.log(error);
     throw error; // Rethrow the error to propagate it to the service

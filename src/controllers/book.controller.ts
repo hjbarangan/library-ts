@@ -79,7 +79,6 @@ const getBooksByPublisher = async (req: Request, res: Response) => {
   }
 };
 
-
 export {
   getAllBooks,
   getBookById,

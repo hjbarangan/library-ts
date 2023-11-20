@@ -38,8 +38,8 @@ const createCategoryService = async (category: Category) => {
 };
 
 const updateCategoryService = async (
-  category: Category,
-  categoryId: number
+  category: any,
+  categoryId: any
 ) => {
   try {
     const updatedCategory = await updateCategory(category, categoryId);

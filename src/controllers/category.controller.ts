@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as CategoryService from "../services/category.service";
-import { Category } from "../interfaces";
 
 const getAllCategories = async (req: Request, res: Response) => {
   try {
@@ -37,11 +36,11 @@ const createCategory = async (req: Request, res: Response) => {
 
 const updateCategory = async (req: Request, res: Response) => {
   try {
-    const updatedCategory: Category = req.body;
-    const categoryId: number = parseInt(req.params.id);
-    await CategoryService.updateCategoryService(updatedCategory, categoryId);
+    const { category_name } = req.body;
+    const categoryId: any = parseInt(req.params.id);
+    await CategoryService.updateCategoryService(categoryId, category_name );
 
-    res.status(200).json({ message: "Category updated" });
+    res.status(200).json({ category_name, message: "Category updated" });
   } catch (error: any) {
     console.error("Error:", error);
     res.status(400).json({ message: error.message });

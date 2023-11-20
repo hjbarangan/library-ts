@@ -36,11 +36,11 @@ const createCategory = async (category: Category) => {
   }
 };
 
-const updateCategory = async (category: Category, categoryId: number) => {
+const updateCategory = async ( categoryId: any, category: any) => {
   try {
     const client = await pool.connect();
     const storedProcedure = "CALL update_category($1, $2)";
-    await client.query(storedProcedure, [category, categoryId]);
+    await client.query(storedProcedure, [categoryId, category]);
   } catch (error) {
     console.log(error);
     throw error; // Rethrow the error to propagate it to the service
