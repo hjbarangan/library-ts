@@ -1,11 +1,5 @@
 import { Router } from "express";
-import {
-  getAllCategories,
-  getCategoryById,
-  createCategory,
-  updateCategory,
-  deleteCategory
-} from "../controllers/category.controller";
+import { getAllPublishersService, getPublisherByIdService, createPublisherService, updatePublisherService, deletePublisherService } from "../services/publisher.service";
 
 const router = Router();
 /**
@@ -39,10 +33,10 @@ const router = Router();
  *               message: Internal server error
  *               error: [error details]
  */
-router.get("/categories", getAllCategories);
-router.get("/categories/:id", getCategoryById);
-router.post("/categories", createCategory);
-router.patch("/categories/:id", updateCategory);
-router.patch("/categories/:id", deleteCategory);
+router.get("/categories", getAllPublishersService);
+router.get("/categories/:id", getPublisherByIdService);
+router.post("/categories", createPublisherService);
+router.patch("/categories/:id", updatePublisherService);
+router.patch("/categories/:id", deletePublisherService);
 
 export default router;

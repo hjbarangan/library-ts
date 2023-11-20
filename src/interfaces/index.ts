@@ -21,4 +21,9 @@ interface Category {
   category_name: string;
 }
 
-export { Book, User, Category };
+interface Publisher {
+  publisher_name: string;
+  publisher_location: string;
+}
+
+export { Book, User, Category, Publisher };

@@ -19,7 +19,7 @@ const router = Router();
 
 /**
  * @swagger
- * /books:
+ * /api/books:
  *   get:
  *     summary: Get all books
  *     description: Retrieve a list of all books.
@@ -33,7 +33,7 @@ const router = Router();
  *             example:
  *               message: Books retrieved successfully
  *               data: [book1, book2]
- *       500:
+ *       400:
  *         description: Internal server error
  *         content:
  *           application/json:
