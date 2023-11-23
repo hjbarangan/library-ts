@@ -10,11 +10,11 @@ interface Book {
 }
 
 interface User {
-  reader_id: number;
-  admin_id: number;
+  firstname: string;
+  lastname: string;
   username: string;
   password: string;
-  status: string;
+  role: string;
 }
 
 interface Category {
@@ -26,4 +26,18 @@ interface Publisher {
   publisher_location: string;
 }
 
-export { Book, User, Category, Publisher };
+interface BorrowRecord {
+  book_id: number;
+  user_id: number;
+  borrow_date: Date;
+  return_date: Date;
+  status: string;
+}
+
+interface Copy {
+  book_id: number;
+  copy_number: number;
+  status: string;
+}
+
+export { Book, User, Category, Publisher, BorrowRecord, Copy };

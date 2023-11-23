@@ -28,8 +28,8 @@ const getUserById = async (userId: number) => {
 const createUser = async (user: User) => {
   try {
     const client = await pool.connect();
-    const { reader_id, admin_id, username, password, status } = user;
-    const params = [reader_id, admin_id, username, password, status];
+    const { firstname, lastname, username, password, role } = user;
+    const params = [firstname, lastname, username, password, role];
     const storedProcedure = "CALL add_useraccount($1, $2, $3, $4, $5)";
     const result = await client.query(storedProcedure, params);
     return result.rows;
@@ -42,14 +42,14 @@ const createUser = async (user: User) => {
 const updateUser = async (user: User, userId: number) => {
   try {
     const client = await pool.connect();
-    const { reader_id, admin_id, username, password, status } = user;
-    const params = [reader_id, admin_id, username, password, status, userId];
+    const { firstname, lastname, username, password, role } = user;
+    const params = [firstname, lastname, username, password, role, userId];
     const storedProcedure = "CALL update_useraccount($1, $2, $3, $4, $5, $6)";
     const result = await client.query(storedProcedure, params);
     return result.rows;
   } catch (error) {
     console.log(error);
-    throw error; 
+    throw error;
   }
 };
 
@@ -61,7 +61,7 @@ const deleteUser = async (userId: number) => {
     return result.rows;
   } catch (error) {
     console.log(error);
-    throw error; 
+    throw error;
   }
 };
 
