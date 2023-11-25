@@ -1,30 +1,23 @@
 import { Router } from "express";
-import { getAllPublishersService, getPublisherByIdService, createPublisherService, updatePublisherService, deletePublisherService } from "../services/publisher.service";
+import { getAllPublishers, getPublisherById, createPublisher, updatePublisher, deletePublisher } from "../controllers/publisher.controller";
 
 const router = Router();
 /**
  * @swagger
  * tags:
- *   name: Category
- *   description: Operations related to category
+ *   name: Publishers
+ *   description: Operations related to publishers
  */
 
 /**
  * @swagger
- * /api/category:
+ * /api/publishers:
  *   get:
- *     summary: Get all category
- *     description: Retrieve a list of all category.
+ *     summary: Get all publishers
+ *     description: Retrieve a list of all publishers.
  *     tags:
- *       - Category
+ *       - Publishers
  *     responses:
- *       200:
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               message: Books retrieved successfully
- *               data: [book1, book2]
  *       400:
  *         description: Internal server error
  *         content:
@@ -33,10 +26,10 @@ const router = Router();
  *               message: Internal server error
  *               error: [error details]
  */
-router.get("/categories", getAllPublishersService);
-router.get("/categories/:id", getPublisherByIdService);
-router.post("/categories", createPublisherService);
-router.patch("/categories/:id", updatePublisherService);
-router.patch("/categories/:id", deletePublisherService);
+router.get("/publishers", getAllPublishers);
+router.get("/publishers/:id", getPublisherById);
+router.post("/publishers", createPublisher);
+router.put("/publishers/:id", updatePublisher);
+router.delete("/publishers/:id", deletePublisher);
 
 export default router;

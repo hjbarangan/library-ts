@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as PublisherService from "../services/publisher.service";
 import { Publisher } from "../interfaces";
 
-const getAllCategories = async (req: Request, res: Response) => {
+const getAllPublishers = async (req: Request, res: Response) => {
   try {
     const categories = await PublisherService.getAllPublishersService();
     res.status(200).json(categories);
@@ -26,10 +26,10 @@ const getPublisherById = async (req: Request, res: Response) => {
 
 const createPublisher = async (req: Request, res: Response) => {
   try {
-    const { publisher_name } = req.body;
-
+    // const { publisher_name, publisher_location } = req.body;
+    const publisher: Publisher = req.body;
     const publisherData =
-      await PublisherService.createPublisherService(publisher_name);
+      await PublisherService.createPublisherService(publisher);
     res.status(201).json({ message: "Publisher created", data: publisherData });
   } catch (error) {
     console.error("Error creating publisher:", error);
@@ -64,7 +64,7 @@ const deletePublisher = async (req: Request, res: Response) => {
 };
 
 export {
-  getAllCategories,
+  getAllPublishers,
   getPublisherById,
   createPublisher,
   updatePublisher,

@@ -17,20 +17,13 @@ const router = Router();
 
 /**
  * @swagger
- * /api/category:
+ * /api/categories:
  *   get:
  *     summary: Get all category
  *     description: Retrieve a list of all category.
  *     tags:
  *       - Category
  *     responses:
- *       200:
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               message: Books retrieved successfully
- *               data: [book1, book2]
  *       400:
  *         description: Internal server error
  *         content:

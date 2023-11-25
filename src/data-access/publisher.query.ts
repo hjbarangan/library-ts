@@ -4,7 +4,7 @@ import { Publisher } from "../interfaces";
 const getAllPublishers = async () => {
   try {
     const client = await pool.connect();
-    const sql = "SELECT * FROM v_publishers";
+    const sql = "SELECT * FROM publisher";
     const result = await client.query(sql);
     return result.rows;
   } catch (error) {
@@ -25,7 +25,7 @@ const getPublisherById = async (publisherId: number) => {
   }
 };
 
-const createPublisher = async (publisher: Publisher) => {
+const createPublisher = async (publisher: any) => {
   try {
     const client = await pool.connect();
     const { publisher_name, publisher_location } = publisher;

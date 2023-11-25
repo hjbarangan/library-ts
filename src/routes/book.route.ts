@@ -26,13 +26,7 @@ const router = Router();
  *     tags:
  *       - Books
  *     responses:
- *       200:
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               message: Books retrieved successfully
- *               data: [book1, book2]
+
  *       400:
  *         description: Internal server error
  *         content:
@@ -59,19 +53,6 @@ router.get("/books", getAllBooks);
  *         schema:
  *           type: integer
  *     responses:
- *       200:
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               message: Book retrieved successfully
- *               data: book
- *       404:
- *         description: Book not found
- *         content:
- *           application/json:
- *             example:
- *               message: Book not found
  *       500:
  *         description: Internal server error
  *         content:
@@ -140,19 +121,7 @@ router.post("/books", createBook);
  *           schema:
  *             $ref: '#/components/schemas/Book'
  *     responses:
- *       200:
- *         description: Book updated successfully
- *         content:
- *           application/json:
- *             example:
- *               message: Book updated successfully
- *               data: updatedBook
- *       404:
- *         description: Book not found
- *         content:
- *           application/json:
- *             example:
- *               message: Book not found
+ 
  *       500:
  *         description: Internal server error
  *         content:
@@ -179,19 +148,7 @@ router.put("/books/:id", updateBook);
  *         schema:
  *           type: integer
  *     responses:
- *       200:
- *         description: Book deleted successfully
- *         content:
- *           application/json:
- *             example:
- *               message: Book deleted successfully
- *               data: deletedBook
- *       404:
- *         description: Book not found
- *         content:
- *           application/json:
- *             example:
- *               message: Book not found
+ 
  *       500:
  *         description: Internal server error
  *         content:
@@ -200,7 +157,7 @@ router.put("/books/:id", updateBook);
  *               message: Internal server error
  *               error: [error details]
  */
-router.patch("/books/:id", deleteBook);
+router.delete("/books/:id", deleteBook);
 router.get("/books/category/:id", getBooksByCategory);
 router.get("/books/publisher/:id", getBooksByPublisher);
 
