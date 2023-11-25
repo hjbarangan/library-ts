@@ -1,4 +1,4 @@
-name: Deploy API on Kamatera Server
+name: Deploy API
 
 on:
   workflow_dispatch:
@@ -37,15 +37,15 @@ jobs:
         tags: herzliyaaa/library-upskill-api:latest
         context: .
 
-    # - name: Deploy to Ubuntu server
-    #   uses: appleboy/ssh-action@v0.1.10
-    #   with:
-    #     host: ${{ secrets.SERVER_HOST }}
-    #     username: ${{ secrets.SERVER_USERNAME }}
-    #     key: ${{ secrets.PRIVATE_KEY }}
-    #     port: 22
-    #     script: |
-    #       cd /opt/api/lib
-    #       sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-    #       sudo docker pull herzliyaaa/library-upskill-api:latest
-    #       sudo docker-compose up -d --build
+    - name: Deploy to Ubuntu server
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /opt/api/lib
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          sudo docker pull herzliyaaa/library-upskill-api:latest
+          sudo docker-compose up -d --build
